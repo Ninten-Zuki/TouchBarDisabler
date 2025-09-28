@@ -192,15 +192,17 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
     [[NSUserDefaults standardUserDefaults] setObject:@NO forKey:@"touchBarDisabled"];
 }
 
-- (void)disableTouchBar {
+-  (void)disableTouchBar {
     NSTask *task = [[NSTask alloc] init];
     [task setLaunchPath:@"/bin/bash"];
     [emptyWindow makeKeyAndOrderFront:self];
     [NSApp activateIgnoringOtherApps:YES];
     [task setArguments:@[ @"-c", @"defaults write com.apple.touchbar.agent PresentationModeGlobal -string fullControlStrip;launchctl unload /System/Library/LaunchAgents/com.apple.controlstrip.plist;killall ControlStrip;launchctl unload /System/Library/LaunchAgents/com.apple.touchbar.agent.plist;launchctl unload /System/Library/LaunchDaemons/com.apple.touchbar.user-device.plist;pkill \"Touch Bar agent\""]];
-    task.terminationHandler = ^(NSTask *task){
-        [emptyWindow setIsVisible:NO];
-        [menu addItem:showHelp];
+    task.terminationHandler = ^(NSTask *t){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [emptyWindow setIsVisible:NO];
+            [menu addItem:showHelp];
+        });
     };
     if (hasSeenHelperOnce) {
         [emptyWindow setIsVisible:YES];
@@ -212,7 +214,6 @@ const CFStringRef kDisplayBrightness = CFSTR(kIODisplayBrightnessKey);
     NSString *enable = NSLocalizedString(@"ENABLE_TOUCH_BAR", nil);
     toggler.title = enable;
     [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"touchBarDisabled"];
-
 }
 
 - (void)toggleTouchBar:(id)sender {
