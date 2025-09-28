@@ -2,6 +2,8 @@
 TouchBarDisabler allows users to manually turn off the Touch Bar on MacBook devices.
 (Testted on A1990 2018 MacBook Pro)
 
+[もしもここが読めるのであればこちらを読んだ方が良いでしょう...](ReadMe-Ja.md)
+
 **You will be guided to turn off System Integrity Protection(SIP) before using the app.**
 
 ![](https://raw.githubusercontent.com/HiKay/TouchBarDisabler/master/screenshots/screenshot.jpg "Screenshot of TouchBarDisabler")
