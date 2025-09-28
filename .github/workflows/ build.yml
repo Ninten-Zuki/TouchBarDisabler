@@ -1,4 +1,5 @@
 name: Build macOS App
+
 on:
   push:
   pull_request:
@@ -8,10 +9,9 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
       - name: Select Xcode version
         run: sudo xcode-select -switch /Applications/Xcode.app
-
       - name: Build .app
         run: |
           xcodebuild \
@@ -22,9 +22,12 @@ jobs:
             ONLY_ACTIVE_ARCH=NO \
             -arch x86_64 -arch arm64 \
             CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
-
-      - name: Upload .app as artifact
+      - name: Zip .app
+        run: |
+          cd build/Build/Products/Release
+          zip -r TouchBarDisabler.zip TouchBarDisabler.app
+      - name: Upload .zip artifact
         uses: actions/upload-artifact@v4
         with:
           name: TouchBarDisabler
-          path: build/Build/Products/Release/TouchBarDisabler.app
+          path: build/Build/Products/Release/TouchBarDisabler.zip
