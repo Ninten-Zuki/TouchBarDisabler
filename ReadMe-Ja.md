@@ -6,7 +6,7 @@ TouchBarDisabler は touchbarを搭載しているMacbookに対して、手動�
 
 ![](https://raw.githubusercontent.com/HiKay/TouchBarDisabler/master/screenshots/screenshot.jpg "Screenshot of TouchBarDisabler")
 
-**多分Actionsの方にビルドしたファイルがあると思うので使いたければそこからどうぞ**
+**多分Actionsの方にビルドしたファイルがあると思うのでそこからどうぞ**
 
 **[もしもこのAppが起動できなかった場合はこちらを参照してください](FAQ.md)**
 ※英語です。当方で翻訳を行う気はそんなにないので各自で翻訳してください....。
